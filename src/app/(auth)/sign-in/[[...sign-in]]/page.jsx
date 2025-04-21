@@ -1,8 +1,18 @@
 import { SignIn } from '@clerk/nextjs';
 import Image from 'next/image';
-
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
+  const {user} = useUser();
+    const router = useRouter();
+    useEffect(()=>{
+  
+      if(!user){
+        router.replace('/dashboard');
+      }
+    }, [user])
+    
   return (
     <div className="min-h-screen grid md:grid-cols-2 bg-gradient-to-r from-blue-50 to-indigo-100">
       {/* Left section with branding or illustration */}

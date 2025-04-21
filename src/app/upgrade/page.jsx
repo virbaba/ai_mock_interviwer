@@ -11,6 +11,7 @@ import {
 import { Check, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Header from "../dashboard/_components/Header";
+import { useUser } from "@clerk/nextjs";
 
 const plans = [
   {
@@ -41,7 +42,15 @@ const plans = [
 ];
 
 const Page = () => {
+  const { user } = useUser();
+  
   const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      router.replace("/sign-in");
+    }
+  }, [user]);
+
   return (
     <>
       <Header />

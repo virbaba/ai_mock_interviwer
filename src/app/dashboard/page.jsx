@@ -1,8 +1,19 @@
-import React from "react";
+'use client'
+import React, { useEffect } from "react";
 import AddNewInterview from "./_components/AddNewInterview";
 import InterviewList from "./_components/InterviewList";
+import { useUser } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 const Dashboard = () => {
+  const {user} = useUser();
+  const router = useRouter();
+  useEffect(()=>{
+
+    if(!user){
+      router.replace('/sign-in');
+    }
+  }, [user])
   return (
     <div className="p-10">
       <h2 className="font-bold text-2xl">Dashboard</h2>
