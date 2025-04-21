@@ -8,7 +8,7 @@ export default function Page() {
   const { user } = useUser();
   const router = useRouter();
   useEffect(() => {
-    if (!user) {
+    if (user) {
       router.replace("/dashboard");
     }
   }, [user]);
