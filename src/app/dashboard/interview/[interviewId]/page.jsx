@@ -6,6 +6,7 @@ import { eq } from "drizzle-orm";
 import { Lightbulb, Webcam as WebcamIcon } from "lucide-react";
 import Webcam from "react-webcam";
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const Interview = ({ params }) => {
   const { interviewId } = use(params);
@@ -26,10 +27,10 @@ const Interview = ({ params }) => {
   };
 
   return (
-    <div className="my-10 flex justify-center flex-col items-center">
-      <h2 className="font-bold text-2xl">Let's Get Started</h2>
+    <div className="my-10">
+      <h2 className="font-bold text-2xl text-center">Let's Get Started</h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-10 ">
         <div className="flex flex-col my-5 gap-5">
           <div className="flex flex-col p-5 rounded-lg border gap-5">
             <h2 className="text-lg">
@@ -42,16 +43,16 @@ const Interview = ({ params }) => {
             </h2>
             <h2 className="text-lg">
               <strong>Years of Experience: </strong>
-              {interviewData?.jobExperience} Year
+              {interviewData?.jobExperience} Years
             </h2>
           </div>
 
-          <div>
-            <h2 className="flex items-center gap-2 font-semibold text-indigo-700">
+          <div className="p-5 border rounded-lg border-yellow-300 bg-yellow-100">
+            <h2 className="flex items-center gap-2 font-semibold text-yellow-500">
               <Lightbulb />
               Information
             </h2>
-            <h2 className="text-justify text-sm text-gray-600 mt-2">
+            <h2 className="text-justify text-yellow-500 mt-3">
               Enable Video Web Cam and Microphone to start your AI Generated
               Mock Interview. It has{" "}
               {process.env.NEXT_PUBLIC_INTERVIEW_QUESTION_COUNT} questions which
@@ -75,13 +76,20 @@ const Interview = ({ params }) => {
               <WebcamIcon className="h-72 w-full my-7 p-20 rounded-lg border bg-gray-200" />
               <Button
                 onClick={() => setWebCamEnabled(true)}
-                className="bg-indigo-700 text-white w-full py-2 rounded-lg font-semibold cursor-pointer hover:bg-indigo-600"
+                className="bg-indigo-400 text-white w-full py-2 rounded-lg font-semibold cursor-pointer hover:bg-indigo-600"
               >
                 Enable Camera and Microphone
               </Button>
             </>
           )}
         </div>
+      </div>
+      <div className="flex justify-end items-end">
+        <Link href={`/dashboard/interview/${interviewId}/start`}>
+          <Button className="bg-indigo-700 hover:bg-indigo-600 cursor-pointer">
+            Start Interview
+          </Button>
+        </Link>
       </div>
     </div>
   );
