@@ -1,3 +1,4 @@
+'use client'
 import { SignIn } from '@clerk/nextjs';
 import Image from 'next/image';
 import { useUser } from "@clerk/nextjs";
@@ -12,7 +13,7 @@ export default function Page() {
         router.replace('/dashboard');
       }
     }, [user])
-    
+
   return (
     <div className="min-h-screen grid md:grid-cols-2 bg-gradient-to-r from-blue-50 to-indigo-100">
       {/* Left section with branding or illustration */}
