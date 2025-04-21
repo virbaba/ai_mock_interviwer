@@ -36,7 +36,7 @@ const QuestionsSection = ({
       <div className="p-6 border rounded-xl shadow-sm bg-white space-y-6 mt-10">
         {/* Question Buttons */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-          {mockInterviewQuestion.map((_, index) => (
+          {mockInterviewQuestion?.map((_, index) => (
             <div
               key={index}
               className={`py-2 px-3 rounded-full text-sm text-center cursor-pointer font-medium transition-all duration-200 ${

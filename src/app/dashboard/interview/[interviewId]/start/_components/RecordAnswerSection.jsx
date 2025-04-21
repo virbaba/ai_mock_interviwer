@@ -1,9 +1,16 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import Webcam from "react-webcam";
+import dynamic from "next/dynamic";
+const Webcam = dynamic(() => import("react-webcam"), {
+  ssr: false,
+});
 import { Button } from "@/components/ui/button";
-import useSpeechToText from "react-hook-speech-to-text";
+const useSpeechToText = dynamic(
+  () => import("react-hook-speech-to-text").then((mod) => mod.default),
+  { ssr: false }
+);
+
 import { Mic } from "lucide-react";
 import { toast } from "sonner";
 import AIResponse from "../../../../../../../utils/GeminiAiModel";
@@ -17,6 +24,7 @@ const RecordAnswerSection = ({
   activeQuestionIndex,
   interviewData,
 }) => {
+  console.log(mockInterviewQuestion);
   const [userAnswer, setUserAnswer] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +43,7 @@ const RecordAnswerSection = ({
   });
 
   useEffect(() => {
-    results.map((result) => {
+    results?.map((result) => {
       setUserAnswer((prevAns) => prevAns + " " + result.transcript);
     });
   }, [results]);

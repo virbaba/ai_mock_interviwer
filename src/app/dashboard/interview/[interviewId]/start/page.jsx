@@ -12,7 +12,7 @@ const StartInterview = ({ params }) => {
   const { interviewId } = use(params);
   const [interviewData, setInterviewData] = useState();
   const [mockInterviewQuestion, setMockInterviewQuestion] = useState();
-
+  console.log(mockInterviewQuestion);
   const [activeQuestionIndex, setActiveQuestionIndex] = useState(0);
 
   useEffect(() => {
@@ -24,8 +24,10 @@ const StartInterview = ({ params }) => {
       .select()
       .from(MockInterview)
       .where(eq(MockInterview.mockId, interviewId));
+
     const jsonMockResp = JSON.parse(result[0].jsonMockResp);
-    setMockInterviewQuestion(jsonMockResp);
+    setMockInterviewQuestion(jsonMockResp.interview_questions);
+
     setInterviewData(result[0]);
   };
   return (

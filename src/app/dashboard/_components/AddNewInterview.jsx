@@ -56,13 +56,13 @@ const AddNewInterview = () => {
             createdAt: moment().format("DD-MM-yyyy"),
           })
           .returning({ mockId: MockInterview.mockId });
+        if (resp) {
+          setOpenDialog(false);
+          setLoading(false);
+          router.push(`/dashboard/interview/${resp[0].mockId}`);
+        }
       } else {
         console.log("error in generate resposne by AI");
-      }
-      if (resp) {
-        setOpenDialog(false);
-        setLoading(false);
-        router.push(`/dashboard/interview/${resp.mockId}`);
       }
     } catch (err) {
       console.error("Gemini API error:", err);
