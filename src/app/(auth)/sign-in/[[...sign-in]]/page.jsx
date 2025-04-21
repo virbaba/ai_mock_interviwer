@@ -1,18 +1,18 @@
-'use client'
-import { SignIn } from '@clerk/nextjs';
-import Image from 'next/image';
+"use client";
+import { SignIn } from "@clerk/nextjs";
+import Image from "next/image";
 import { useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Page() {
-  const {user} = useUser();
-    const router = useRouter();
-    useEffect(()=>{
-  
-      if(!user){
-        router.replace('/dashboard');
-      }
-    }, [user])
+  const { user } = useUser();
+  const router = useRouter();
+  useEffect(() => {
+    if (!user) {
+      router.replace("/dashboard");
+    }
+  }, [user]);
 
   return (
     <div className="min-h-screen grid md:grid-cols-2 bg-gradient-to-r from-blue-50 to-indigo-100">
@@ -34,16 +34,16 @@ export default function Page() {
 
       {/* Right section with Clerk's SignUp */}
       <div className="flex items-center justify-center p-6">
-      <SignIn
-            appearance={{
-              elements: {
-                formButtonPrimary: 'bg-indigo-600 hover:bg-indigo-700 text-white',
-              },
-              variables: {
-                colorPrimary: '#4F46E5',
-              },
-            }}
-          />
+        <SignIn
+          appearance={{
+            elements: {
+              formButtonPrimary: "bg-indigo-600 hover:bg-indigo-700 text-white",
+            },
+            variables: {
+              colorPrimary: "#4F46E5",
+            },
+          }}
+        />
       </div>
     </div>
   );
